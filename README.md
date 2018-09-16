@@ -1,5 +1,5 @@
 # DNS-Over-HTTPS
-A ready to deploy DNS-Over-HTTPS(DoH) setup via DNSCrypt on Windows.
+A ready-to-deploy DNS-Over-HTTPS(DoH) setup via DNSCrypt on Windows.
 
 # Installation
 
@@ -13,4 +13,8 @@ Run `service-start.bat` as an Administrator.
 
 Point your DNS server settings in Windows to the ones you set in `dnscrypt-proxy.toml`.
 
-Visit `dnsleaktest.com` for confirmation.
+Visit https://dnsleaktest.com/ for confirmation.
+
+# Tip
+
+CloudFlare DNS users can verify DoH connections at https://1.1.1.1/help/
