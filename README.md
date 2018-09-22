@@ -1,5 +1,5 @@
 # DNS-Over-HTTPS
-A ready-to-deploy DNS-Over-HTTPS(DoH) setup via DNSCrypt on Windows.
+A ready-to-deploy DNS-Over-HTTPS(DoH) setup via [DNSCrypt](https://github.com/jedisct1/dnscrypt-proxy) on Windows.
 
 # Installation
 
