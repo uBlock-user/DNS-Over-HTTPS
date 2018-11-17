@@ -3,7 +3,7 @@ A ready-to-deploy DNS-Over-HTTPS(DoH) setup via [DNSCrypt](https://github.com/je
 
 # Installation
 
-Unzip the package downloaded from [Releases](https://github.com/uBlock-user/DNS-Over-HTTPS/releases) section.
+Unzip the package downloaded from the download button.
 
 Run `service-install.bat` as an Administrator.
 
