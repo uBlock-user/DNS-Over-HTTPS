@@ -1,5 +1,5 @@
 # DNS-Over-HTTPS
-A ready-to-deploy DNS-Over-HTTPS(DoH) setup via [DNSCrypt](https://github.com/jedisct1/dnscrypt-proxy) on Windows.
+A ready-to-deploy DNS-Over-HTTPS(DoH) setup via [DNSCrypt-proxy](https://github.com/jedisct1/dnscrypt-proxy) on Windows.
 
 # Installation
 
@@ -17,4 +17,4 @@ Visit [https://dnsleaktest.com/](https://dnsleaktest.com/) for confirmation.
 
 # Tip
 
-CloudFlare DNS users can verify DoH connections at [https://1.1.1.1/help/](https://1.1.1.1/help/)
+CloudFlare DNS users can verify DoH connections at [https://cloudflare-dns.com/help](https://cloudflare-dns.com/help)
