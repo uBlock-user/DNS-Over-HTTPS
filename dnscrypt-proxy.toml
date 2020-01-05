@@ -27,7 +27,7 @@
 ## The proxy will automatically pick the fastest, working servers from the list.
 ## Remove the leading # first to enable this; lines starting with # are ignored.
 
-server_names = ['cloudflare', 'google']
+server_names = ['cloudflare', 'google', 'cloudflare2', 'google2']
 
 
 ## List of local addresses and ports to listen to. Can be IPv4 and/or IPv6.
@@ -38,7 +38,7 @@ listen_addresses = ['127.0.1.100:53', '127.0.1.200:53']
 
 ## Maximum number of simultaneous client connections to accept
 
-max_clients = 500
+max_clients = 250
 
 
 ## Switch to a different system user after listening sockets have been created.
@@ -103,7 +103,7 @@ force_tcp = false
 
 ## How long a DNS query will wait for a response, in milliseconds
 
-timeout = 500
+timeout = 300
 
 
 ## Keepalive for HTTP (HTTPS, HTTP/2) queries, in seconds
@@ -115,8 +115,7 @@ keepalive = 30
 ## Setting this to `false` means that some responses will be lies.
 ## Unfortunately, `false` appears to be required for Android 8+
 
-blocked_query_response = 'refused'
-
+blocked_query_response = 'a:0.0.0.0'
 
 ## Load-balancing strategy: 'p2' (default), 'ph', 'first' or 'random'
 
@@ -125,22 +124,22 @@ blocked_query_response = 'refused'
 ## Set to `true` to constantly try to estimate the latency of all the resolvers
 ## and adjust the load-balancing parameters accordingly, or to `false` to disable.
 
-# lb_estimator = true
+## lb_estimator = true
 
 
 ## Log level (0-6, default: 2 - 0 is very verbose, 6 only contains fatal errors)
 
-# log_level = 2
+## log_level = 0
 
 
 ## log file for the application
 
-# log_file = 'dnscrypt-proxy.log'
+## log_file = 'dnscrypt-proxy.log'
 
 
 ## Use the system logger (syslog on Unix, Event Log on Windows)
 
-# use_syslog = true
+## use_syslog = true
 
 
 ## Delay, in minutes, after which certificates are reloaded
@@ -175,7 +174,7 @@ cert_refresh_delay = 240
 ## Keep tls_cipher_suite empty if you have issues fetching sources or
 ## connecting to some DoH servers. Google and Cloudflare are fine with it.
 
-# tls_cipher_suite = [52392, 49199]
+## tls_cipher_suite = [52392, 49199]
 
 
 ## Fallback resolver
@@ -254,7 +253,21 @@ log_files_max_backups = 1
 
 block_ipv6 = false
 
+## Immediately respond to A and AAAA queries for host names without a domain name
 
+block_unqualified = true
+
+
+## Immediately respond to queries for local zones instead of leaking them to
+## upstream resolvers (always causing errors or timeouts).
+
+block_undelegated = true
+
+
+## TTL for synthetic responses sent when a request has been blocked (due to
+## IPv6 or blacklists).
+
+reject_ttl = 600
 
 ##################################################################################
 #        Route queries for specific domains to a dedicated set of servers        #
@@ -282,6 +295,9 @@ block_ipv6 = false
 
 # cloaking_rules = 'cloaking-rules.txt'
 
+## TTL used when serving entries in cloaking-rules.txt
+
+# cloak_ttl = 600
 
 
 ###########################
@@ -513,7 +529,6 @@ cache_neg_max_ttl = 600
 [sources]
 
 ## An example of a remote source from https://github.com/DNSCrypt/dnscrypt-resolvers
-##
 ## [sources.'public-resolvers']
 ## urls = ['https://raw.githubusercontent.com/DNSCrypt/dnscrypt-resolvers/master/v2/public-resolvers.md', 'https://download.dnscrypt.info/resolvers-list/v2/public-resolvers.md']
 ## cache_file = 'public-resolvers.md'
@@ -521,11 +536,67 @@ cache_neg_max_ttl = 600
 ## refresh_delay = 72
 ## prefix = ''
 
-
 [static]
 
 [static.'cloudflare']
-stamp = 'sdns://AgcAAAAAAAAAAAASY2xvdWRmbGFyZS1kbnMuY29tCi9kbnMtcXVlcnk'
+stamp = 'sdns://AgcAAAAAAAAABzEuMS4xLjEAEmNsb3VkZmxhcmUtZG5zLmNvbQovZG5zLXF1ZXJ5'
+
+[static.'cloudflare2']
+stamp = 'sdns://AgcAAAAAAAAABzEuMC4wLjEAEmNsb3VkZmxhcmUtZG5zLmNvbQovZG5zLXF1ZXJ5'
 
 [static.'google']
-stamp = 'sdns://AgcAAAAAAAAAAAAKZG5zLmdvb2dsZQovZG5zLXF1ZXJ5'
+stamp = 'sdns://AgcAAAAAAAAABzguOC44LjgACmRucy5nb29nbGUKL2Rucy1xdWVyeQ'
+
+[static.'google2']
+stamp = 'sdns://AgcAAAAAAAAABzguOC40LjQACmRucy5nb29nbGUKL2Rucy1xdWVyeQ'
+
+##################################
+#        Local DoH server        #
+##################################
+
+[local_doh]
+
+## dnscrypt-proxy can act as a local DoH server. By doing so, web browsers
+## requiring a direct connection to a DoH server in order to enable some
+## features will enable these, without bypassing your DNS proxy..
+
+## Addresses that the local DoH server should listen to
+
+# listen_addresses = ['127.0.0.1:3000']
+
+
+## URL path - The standard one is "/dns-query", but anything can be used.
+
+# path = "/dns-query"
+
+
+## Certificate file and key - Note that the certificate has to be trusted.
+## See the Wiki for more information.
+
+# cert_file = "localhost.pem"
+# cert_key_file = "localhost.pem"
+
+
+################################
+#        Anonymized DNS        #
+################################
+
+[anonymized_dns]
+
+## Define one or more routes, i.e. indirect ways to reach servers.
+## A set of possible relay servers is assigned to each DNS resolver.
+## A relay can be specified as a DNS Stamp (either a relay stamp, or a
+## DNSCrypt stamp), an IP:port, a hostname:port, or a server name, if
+## the server is in the servers_list.
+
+## routes = [{server_name='Google', via= 'sdns://gQs4LjguOC44OjQ0Mw'}]
+
+
+## Optional, local, static list of additional servers
+## Mostly useful for testing your own servers.
+
+##[static]
+
+## [static.'Google']
+## stamp = 'sdns://gQs4LjguOC44OjQ0Mw'
+
