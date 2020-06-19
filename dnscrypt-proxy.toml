@@ -27,7 +27,7 @@
 ## The proxy will automatically pick the fastest, working servers from the list.
 ## Remove the leading # first to enable this; lines starting with # are ignored.
 
-server_names = ['cloudflare', 'google', 'cloudflare2', 'google2']
+server_names = ['cloudflare', 'cloudflare2']
 
 
 ## List of local addresses and ports to listen to. Can be IPv4 and/or IPv6.
@@ -457,7 +457,7 @@ cache_neg_max_ttl = 600
 
   ## Path to the file of whitelisting rules (absolute, or relative to the same directory as the executable file)
 
-  # whitelist_file = 'whitelist.txt'
+  ## whitelist_file = 'whitelist.txt'
 
 
   ## Optional path to a file logging whitelisted queries
@@ -543,12 +543,6 @@ stamp = 'sdns://AgcAAAAAAAAABzEuMS4xLjEAEmNsb3VkZmxhcmUtZG5zLmNvbQovZG5zLXF1ZXJ5
 
 [static.'cloudflare2']
 stamp = 'sdns://AgcAAAAAAAAABzEuMC4wLjEAEmNsb3VkZmxhcmUtZG5zLmNvbQovZG5zLXF1ZXJ5'
-
-[static.'google']
-stamp = 'sdns://AgcAAAAAAAAABzguOC44LjgACmRucy5nb29nbGUKL2Rucy1xdWVyeQ'
-
-[static.'google2']
-stamp = 'sdns://AgcAAAAAAAAABzguOC40LjQACmRucy5nb29nbGUKL2Rucy1xdWVyeQ'
 
 ##################################
 #        Local DoH server        #

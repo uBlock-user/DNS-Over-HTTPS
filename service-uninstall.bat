@@ -22,7 +22,7 @@ pushd "%~dp0"
 dnscrypt-proxy.exe -service uninstall
 popd
 echo.
-echo Thank you for using DNSCrypt-Proxy!
+echo DNSCrypt-Proxy successfully uninstalled!
 pause
 
 

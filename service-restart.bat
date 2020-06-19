@@ -23,7 +23,7 @@ dnscrypt-proxy.exe -service stop
 dnscrypt-proxy.exe -service start
 popd
 echo.
-echo Thank you for using DNSCrypt-Proxy!
+echo DNSCrypt-Proxy successfully restarted!
 
 :end
 set /p =Press [Enter] to exit . . .
