@@ -3,7 +3,7 @@ A ready-to-deploy DNS-Over-HTTP/2(DoH) setup via [DNSCrypt-proxy](https://github
 
 # Installation
 
-Unzip the package downloaded from the download button.
+Unzip the package downloaded as .zip.
 
 Run `service-install.bat` as an Administrator.
 
