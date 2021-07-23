@@ -29,14 +29,15 @@
 ##
 ## Remove the leading # first to enable this; lines starting with # are ignored.
 
-server_names = ['cloudflare', 'cloudflare2', 'cloudflare-ipv6']
+# server_names = ['cloudflare', 'cloudflare2', 'cloudflare-ipv6']
 
 
 ## List of local addresses and ports to listen to. Can be IPv4 and/or IPv6.
 ## Example with both IPv4 and IPv6:
 ## listen_addresses = ['127.0.0.1:53', '[::1]:53']
 
-listen_addresses = ['127.0.1.100:53', '127.0.1.200:53', '[0:0:0:0:0:0:0:1]:53']
+listen_addresses = ['127.0.0.1:53', '127.0.0.2:53', '[::1]:53']
+
 
 ## Maximum number of simultaneous client connections to accept
 
@@ -69,10 +70,10 @@ doh_servers = true
 ## Require servers defined by remote sources to satisfy specific properties
 
 # Server must support DNS security extensions (DNSSEC)
-require_dnssec = true
+require_dnssec = false
 
 # Server must not log user queries (declarative)
-require_nolog = false
+require_nolog = true
 
 # Server must not enforce its own blocklist (for parental control, ads blocking...)
 require_nofilter = true
@@ -108,7 +109,7 @@ force_tcp = false
 ## increase this. Startup may be slower if you do so.
 ## Don't increase it too much. 10000 is the highest reasonable value.
 
-timeout = 1000
+timeout = 500
 
 
 ## Keepalive for HTTP (HTTPS, HTTP/2) queries, in seconds
@@ -224,7 +225,7 @@ cert_refresh_delay = 240
 ##
 ## If more than one resolver is specified, they will be tried in sequence.
 
-## fallback_resolvers = ['9.9.9.9:53', '8.8.8.8:53']
+fallback_resolvers = ['1.1.1.1:53', '1.0.0.1:53']
 
 
 ## Always use the fallback resolver before the system DNS settings.
@@ -250,7 +251,7 @@ netprobe_timeout = 0
 ## On other operating systems, the connection will be initialized
 ## but nothing will be sent at all.
 
-## netprobe_address = '127.0.1.100:53'
+netprobe_address = '1.1.1.1:53'
 
 
 ## Offline mode - Do not use any remote encrypted servers.
@@ -493,7 +494,7 @@ cache_neg_max_ttl = 600
 
   ## Path to the file of blocking rules (absolute, or relative to the same directory as the config file)
 
-  blocked_names_file = 'blocked-names.txt'
+  # blocked_names_file = 'blocked-names.txt'
 
 
   ## Optional path to a file logging blocked queries
@@ -651,21 +652,21 @@ cache_neg_max_ttl = 600
 
   ## An example of a remote source from https://github.com/DNSCrypt/dnscrypt-resolvers
 
-  # [sources.'public-resolvers']
-  # urls = ['https://raw.githubusercontent.com/DNSCrypt/dnscrypt-resolvers/master/v3/public-resolvers.md', 'https://download.dnscrypt.info/resolvers-list/v3/public-resolvers.md', 'https://ipv6.download.dnscrypt.info/resolvers-list/v3/public-resolvers.md', 'https://download.dnscrypt.net/resolvers-list/v3/public-resolvers.md']
-  # cache_file = 'public-resolvers.md'
-  # minisign_key = 'RWQf6LRCGA9i53mlYecO4IzT51TGPpvWucNSCh1CBM0QTaLn73Y7GFO3'
-  # refresh_delay = 72
-  # prefix = ''
+  ## [sources.'public-resolvers']
+  ## urls = ['https://raw.githubusercontent.com/DNSCrypt/dnscrypt-resolvers/master/v3/public-resolvers.md', 'https://download.dnscrypt.info/resolvers-list/v3/public-resolvers.md', 'https://ipv6.download.dnscrypt.info/resolvers-list/v3/public-resolvers.md', 'https://download.dnscrypt.net/resolvers-list/v3/public-resolvers.md']
+  ## cache_file = 'public-resolvers.md'
+  ## minisign_key = 'RWQf6LRCGA9i53mlYecO4IzT51TGPpvWucNSCh1CBM0QTaLn73Y7GFO3'
+  ## refresh_delay = 72
+  ## prefix = ''
 
   ## Anonymized DNS relays
 
-  # [sources.'relays']
-  # urls = ['https://raw.githubusercontent.com/DNSCrypt/dnscrypt-resolvers/master/v3/relays.md', 'https://download.dnscrypt.info/resolvers-list/v3/relays.md', 'https://ipv6.download.dnscrypt.info/resolvers-list/v3/relays.md', 'https://download.dnscrypt.net/resolvers-list/v3/relays.md']
-  # cache_file = 'relays.md'
-  # minisign_key = 'RWQf6LRCGA9i53mlYecO4IzT51TGPpvWucNSCh1CBM0QTaLn73Y7GFO3'
-  # refresh_delay = 72
-  # prefix = ''
+  [sources.'relays']
+  ## urls = ['https://raw.githubusercontent.com/DNSCrypt/dnscrypt-resolvers/master/v3/relays.md', 'https://download.dnscrypt.info/resolvers-list/v3/relays.md', 'https://ipv6.download.dnscrypt.info/resolvers-list/v3/relays.md', 'https://download.dnscrypt.net/resolvers-list/v3/relays.md']
+  ## cache_file = 'relays.md'
+  ## minisign_key = 'RWQf6LRCGA9i53mlYecO4IzT51TGPpvWucNSCh1CBM0QTaLn73Y7GFO3'
+  ## refresh_delay = 72
+  ## prefix = ''
 
   ## Quad9 over DNSCrypt - https://quad9.net/
 
@@ -818,8 +819,6 @@ skip_incompatible = false
 
 ## Optional, local, static list of additional servers
 ## Mostly useful for testing your own servers.
-
-[static]
 
 [static.'cloudflare']
 stamp = 'sdns://AgcAAAAAAAAABzEuMS4xLjEAIDFkb3QxZG90MWRvdDEuY2xvdWRmbGFyZS1kbnMuY29tCi9kbnMtcXVlcnk'
