@@ -29,7 +29,7 @@
 ##
 ## Remove the leading # first to enable this; lines starting with # are ignored.
 
-# server_names = ['cloudflare', 'cloudflare2', 'cloudflare-ipv6']
+server_names = ['cloudflare', 'cloudflare2', 'cloudflare-ipv6']
 
 
 ## List of local addresses and ports to listen to. Can be IPv4 and/or IPv6.
@@ -70,7 +70,7 @@ doh_servers = true
 ## Require servers defined by remote sources to satisfy specific properties
 
 # Server must support DNS security extensions (DNSSEC)
-require_dnssec = false
+require_dnssec = true
 
 # Server must not log user queries (declarative)
 require_nolog = true
@@ -494,7 +494,7 @@ cache_neg_max_ttl = 600
 
   ## Path to the file of blocking rules (absolute, or relative to the same directory as the config file)
 
-  # blocked_names_file = 'blocked-names.txt'
+  blocked_names_file = 'blocked-names.txt'
 
 
   ## Optional path to a file logging blocked queries
@@ -819,6 +819,8 @@ skip_incompatible = false
 
 ## Optional, local, static list of additional servers
 ## Mostly useful for testing your own servers.
+
+[static]
 
 [static.'cloudflare']
 stamp = 'sdns://AgcAAAAAAAAABzEuMS4xLjEAIDFkb3QxZG90MWRvdDEuY2xvdWRmbGFyZS1kbnMuY29tCi9kbnMtcXVlcnk'
