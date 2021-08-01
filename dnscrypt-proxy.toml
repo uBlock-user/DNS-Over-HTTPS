@@ -36,7 +36,7 @@ server_names = ['cloudflare', 'cloudflare2', 'cloudflare-ipv6']
 ## Example with both IPv4 and IPv6:
 ## listen_addresses = ['127.0.0.1:53', '[::1]:53']
 
-listen_addresses = ['127.0.0.1:53', '127.0.0.2:53', '[::1]:53']
+listen_addresses = ['127.0.1.100:53', '127.0.1.200:53', '[::1]:53']
 
 
 ## Maximum number of simultaneous client connections to accept
